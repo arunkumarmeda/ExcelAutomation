@@ -30,7 +30,7 @@ async function uploadPDF(){
 
         const response =
         await fetch(
-        "https://YOUR-N8N-URL/webhook/upload-eob",
+        "http://localhost:5678/webhook/upload-eob",
         {
             method:"POST",
             body:formData
