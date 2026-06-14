@@ -36,6 +36,18 @@ async function uploadPDF(){
             body:formData
         });
 
+        const response = await fetch(
+         "http://localhost:5678/webhook/upload-eob",
+        {
+             method: "POST",
+             body: formData
+         }
+);
+
+if (!response.ok) {
+  const errorText = await response.text();
+  throw new Error(errorText || "n8n request failed");
+}
         const blob =
         await response.blob();
 
@@ -58,13 +70,12 @@ async function uploadPDF(){
         "Excel Downloaded";
 
     }
-    catch(error){
+    catch(error)
+{
+  document.getElementById("status").innerText =
+    "Error: " + error.message;
 
-        document.getElementById(
-        "status"
-        ).innerText =
-        "Error";
+  console.error(error);
+}
 
-        console.log(error);
-    }
 }
